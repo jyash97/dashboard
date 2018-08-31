@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'react-emotion';
+import Stripe from 'react-stripe-checkout';
 import { Check } from 'react-feather';
 import ReactToolTip from 'react-tooltip';
 import AppButton from './AppButton';
@@ -227,7 +228,31 @@ const HeadingTr = css`
 		}
 	}
 `;
-
+const onToken = (token, plan) => {
+	fetch('https://accapi-staging.bottleneck.io/subscription', {
+		headers: {
+			'content-type': 'application/json',
+		},
+		method: 'DELETE',
+		credentials: 'include',
+		body: JSON.stringify({ token, plan }),
+	})
+		.then(res => res.json())
+		.then((res) => {
+			console.log('THIS IS SUCCESS', res);
+			// notification.success({
+			// 	message: 'Subscribed',
+			// 	description: `Successfully subscribed to ${plan} plan`,
+			// });
+		})
+		.catch((err) => {
+			console.log('THIS IS SUCCESS', err);
+			// notification.error({
+			// 	message: 'Error',
+			// 	description: 'Something went wrong, please retry',
+			// });
+		});
+};
 export default class PricingTable extends Component {
 	constructor(props) {
 		super(props);
@@ -609,7 +634,7 @@ export default class PricingTable extends Component {
 								</AppButton>
 							</td>
 							<td>
-								<AppButton
+								{/* <AppButton
 									uppercase
 									big
 									bold
@@ -620,10 +645,16 @@ export default class PricingTable extends Component {
 									onClick={() => onClickButton('bootstrap', 29)}
 								>
 									Subscribe
-								</AppButton>
+								</AppButton> */}
 							</td>
 							<td>
-								<AppButton
+								<Stripe
+									name="Reactive Apps Business Plan"
+									amount={2900}
+									token={token => onToken(token, 'bootstrap-monthly')}
+									stripeKey="pk_test_DYtAxDRTg6cENksacX1zhE02"
+								/>
+								{/* <AppButton
 									uppercase
 									big
 									bold
@@ -634,7 +665,7 @@ export default class PricingTable extends Component {
 									onClick={() => onClickButton('growth', 89)}
 								>
 									Subscribe
-								</AppButton>
+								</AppButton> */}
 							</td>
 						</tr>
 					</tfoot>
