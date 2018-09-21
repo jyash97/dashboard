@@ -89,7 +89,7 @@ class CreateAppModal extends Component {
 			<Col span={4}>{records}</Col>
 			<Col span={4}>{calls}</Col>
 			<Col>
-				<a href="https://appbase.io/pricing/" target="_blank" rel="noopener noreferer">
+				<a href="https://appbase.io/pricing/" target="_blank" rel="noopener noreferrer">
 					<Icon type="info-circle" />
 				</a>
 			</Col>
