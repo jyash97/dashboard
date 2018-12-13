@@ -19,7 +19,7 @@ module.exports = {
 			apiKey: process.env.SENTRY_TOKEN,
 
 			// Release version name/hash is required
-			release: 'v2.0.3',
+			release: 'v2.0.4',
 		}),
 	],
 	module: {
