@@ -1,11 +1,6 @@
 import React from 'react';
 import { Button, Icon } from 'antd';
 import { connect } from 'react-redux';
-import * as Sentry from '@sentry/browser';
-
-Sentry.init({
-	dsn: 'https://8e07fb23ba8f46d8a730e65496bb7f00@sentry.io/58038',
-});
 
 class ErrorPage extends React.Component {
 	state = {
@@ -27,12 +22,6 @@ class ErrorPage extends React.Component {
 	componentDidCatch(error, errorInfo) {
 		this.setState({
 			error: true,
-		});
-		Sentry.withScope((scope) => {
-			Object.keys(errorInfo).forEach((key) => {
-				scope.setExtra(key, errorInfo[key]);
-			});
-			Sentry.captureException(error);
 		});
 	}
 

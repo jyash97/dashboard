@@ -9,6 +9,7 @@ import configureStore from './store';
 import Dashboard from './Dashboard';
 
 import { mediaKey } from './utils/media';
+import './reporter';
 
 // global styles
 // eslint-disable-next-line
@@ -44,8 +45,6 @@ p {
 
 const { Content } = Layout;
 const { store, persistor } = configureStore();
-
-console.log(process.env);
 
 const App = () => (
 	<Content>
