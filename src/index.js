@@ -45,7 +45,7 @@ p {
 const { Content } = Layout;
 const { store, persistor } = configureStore();
 
-console.log('Hey', process.env);
+console.log(process.env);
 
 const App = () => (
 	<Content>
