@@ -8,7 +8,7 @@ import { headingText, statsText, statsContainer } from './styles';
 
 const UsageRenderer = ({ computedMetrics, plan }) => {
 	const appCount = getAppCount(computedMetrics, plan);
-	const action = Math.ceil(get(w.a.r, 'action.percentage'));
+	const action = Math.ceil(get(v.t.r, 'action.percentage'));
 	const record = Math.ceil(get(appCount, 'records.percentage'));
 
 	return (

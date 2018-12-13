@@ -14,7 +14,7 @@ module.exports = {
 			organization: 'test-5l',
 			project: 'react',
 			apiKey: process.env.SENTRY_TOKEN,
-			release: 'v2.0.7',
+			release: 'v2.0.8',
 			filenameTransform(filename) {
 				return `~/dist/${filename}`;
 			},
