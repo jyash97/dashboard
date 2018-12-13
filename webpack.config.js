@@ -16,7 +16,7 @@ module.exports = {
 			apiKey: process.env.SENTRY_TOKEN,
 			release: 'v2.0.7',
 			filenameTransform(filename) {
-				return `/dist/${filename}`;
+				return `~/dist/${filename}`;
 			},
 		}),
 	],
