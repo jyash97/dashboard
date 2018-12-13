@@ -39,7 +39,11 @@ class Dashboard extends Component {
 	}
 
 	render() {
-		const { user } = this.props;
+		const {
+			user: {
+				user: { s },
+			},
+		} = this.props;
 		const { error } = this.state;
 
 		if (user.isLoading) {
