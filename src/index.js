@@ -9,6 +9,7 @@ import configureStore from './store';
 import Dashboard from './Dashboard';
 
 import { mediaKey } from './utils/media';
+import './ErrorReporting';
 
 // global styles
 // eslint-disable-next-line
