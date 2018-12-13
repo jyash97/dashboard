@@ -83,9 +83,6 @@ class Dashboard extends Component {
 				</section>
 			);
 		}
-		const {
-			a: { b },
-		} = user;
 		return (
 			<Router>
 				<Fragment>
