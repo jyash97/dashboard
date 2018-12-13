@@ -1,8 +1,9 @@
+import { version } from './package.json';
+
 const path = require('path');
-const SentryPlugin = require('@sentry/webpack-plugin');
+const SentryPlugin = require('webpack-sentry-plugin');
 
 const isProduction = String(process.env.NODE_ENV) === 'production';
-console.log(process.env);
 
 module.exports = {
 	entry: path.join(__dirname, 'src/index.js'),
@@ -14,11 +15,15 @@ module.exports = {
 	},
 	plugins: isProduction
 		? [
-				new SentryPlugin({
-					include: './dist',
-					ignore: ['node_modules', 'webpack.config.js'],
-					configFile: './.env',
-				}),
+			new SentryPlugin({
+				// Sentry options are required
+				organization: 'your-organization-name',
+				project: 'your-project-name',
+				apiKey: process.env.SENTRY_TOKEN,
+
+				// Release version name/hash is required
+				release: version,
+			}),
 		] // prettier-ignore
 		: [],
 	module: {
