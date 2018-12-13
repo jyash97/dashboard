@@ -15,8 +15,8 @@ module.exports = {
 		? [
 			new SentryPlugin({
 				// Sentry options are required
-				organization: 'your-organization-name',
-				project: 'your-project-name',
+				organization: 'test-5l',
+				project: 'react',
 				apiKey: process.env.SENTRY_TOKEN,
 
 				// Release version name/hash is required
