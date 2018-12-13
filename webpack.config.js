@@ -14,10 +14,10 @@ module.exports = {
 			organization: 'test-5l',
 			project: 'react',
 			apiKey: process.env.SENTRY_TOKEN,
-			release: '[contenthash]',
-			exclude: /\.html$/,
+			release: 'v2.0.5',
 		}),
 	],
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
