@@ -11,19 +11,17 @@ module.exports = {
 		filename: 'bundle.js',
 		chunkFilename: '[name].[contenthash].bundle.js',
 	},
-	plugins: isProduction
-		? [
-			new SentryPlugin({
-				// Sentry options are required
-				organization: 'test-5l',
-				project: 'react',
-				apiKey: process.env.SENTRY_TOKEN,
+	plugins: [
+		new SentryPlugin({
+			// Sentry options are required
+			organization: 'test-5l',
+			project: 'react',
+			apiKey: process.env.SENTRY_TOKEN,
 
-				// Release version name/hash is required
-				release: 'v2.0.1',
-			}),
-		] // prettier-ignore
-		: [],
+			// Release version name/hash is required
+			release: 'v2.0.1',
+		}),
+	],
 	module: {
 		rules: [
 			{
