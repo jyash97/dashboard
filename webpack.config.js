@@ -1,5 +1,3 @@
-import { version } from './package.json';
-
 const path = require('path');
 const SentryPlugin = require('webpack-sentry-plugin');
 
@@ -22,7 +20,7 @@ module.exports = {
 				apiKey: process.env.SENTRY_TOKEN,
 
 				// Release version name/hash is required
-				release: version,
+				release: 'v2.0.1',
 			}),
 		] // prettier-ignore
 		: [],
