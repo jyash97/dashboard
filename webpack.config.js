@@ -14,7 +14,10 @@ module.exports = {
 			organization: 'test-5l',
 			project: 'react',
 			apiKey: process.env.SENTRY_TOKEN,
-			release: 'v2.0.6',
+			release: 'v2.0.7',
+			filenameTransform(filename) {
+				return `/dist/${filename}`;
+			},
 		}),
 	],
 	devtool: 'source-map',
