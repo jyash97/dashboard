@@ -2,6 +2,7 @@ const path = require('path');
 const SentryPlugin = require('@sentry/webpack-plugin');
 
 const isProduction = String(process.env.NODE_ENV) === 'production';
+console.log(process.env);
 
 module.exports = {
 	entry: path.join(__dirname, 'src/index.js'),
