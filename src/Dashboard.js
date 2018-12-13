@@ -4,6 +4,7 @@ import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'antd';
+import Raven from 'raven-js';
 
 import Loader from './components/Loader';
 import Logo from './components/Logo';
@@ -36,6 +37,7 @@ class Dashboard extends Component {
 		this.setState({
 			error: true,
 		});
+		Raven.captureException(error, { extra: errorInfo });
 	}
 
 	render() {

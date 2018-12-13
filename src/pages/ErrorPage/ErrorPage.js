@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Icon } from 'antd';
 import { connect } from 'react-redux';
+import Raven from 'raven-js';
 
 class ErrorPage extends React.Component {
 	state = {
@@ -23,6 +24,7 @@ class ErrorPage extends React.Component {
 		this.setState({
 			error: true,
 		});
+		Raven.captureException(error, { extra: errorInfo });
 	}
 
 	render() {
