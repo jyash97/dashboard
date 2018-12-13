@@ -45,6 +45,8 @@ p {
 const { Content } = Layout;
 const { store, persistor } = configureStore();
 
+console.log('Hey', process.env);
+
 const App = () => (
 	<Content>
 		<PersistGate loading={null} persistor={persistor}>
