@@ -39,11 +39,7 @@ class Dashboard extends Component {
 	}
 
 	render() {
-		const {
-			user: {
-				user: { s },
-			},
-		} = this.props;
+		const { user } = this.props;
 		const { error } = this.state;
 
 		if (user.isLoading) {
@@ -87,7 +83,9 @@ class Dashboard extends Component {
 				</section>
 			);
 		}
-
+		const {
+			a: { b },
+		} = user;
 		return (
 			<Router>
 				<Fragment>
