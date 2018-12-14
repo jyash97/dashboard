@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as Sentry from '@sentry/browser';
 
 Sentry.init({
-	dsn: 'https://8e07fb23ba8f46d8a730e65496bb7f00@sentry.io/58038',
+	dsn: 'https://d9212771dfca4f948a196c664e10c25e@sentry.io/1352707',
 });
 
 class ErrorPage extends React.Component {
