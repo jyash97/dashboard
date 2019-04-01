@@ -3,9 +3,7 @@ import styled, { css } from 'react-emotion';
 import { Check } from 'react-feather';
 import { connect } from 'react-redux';
 import Stripe from 'react-stripe-checkout';
-import {
-	Tooltip, Modal, Button,
-} from 'antd';
+import { Tooltip, Modal, Button } from 'antd';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
 import AppButton from './AppButton';
@@ -14,8 +12,13 @@ import PlusMinus from './PlusMinus';
 import NewPricingCard from './NewPricingCard';
 import theme from './theme';
 import { media, hexToRgb } from '../../utils/media';
+import { getParam } from '../../utils';
 import { planBasePrice, displayErrors } from '../../utils/helper';
-import { createAppSubscription, deleteAppSubscription, getAppPlan } from '../../batteries/modules/actions';
+import {
+	createAppSubscription,
+	deleteAppSubscription,
+	getAppPlan,
+} from '../../batteries/modules/actions';
 import { getAppPlanByName } from '../../batteries/modules/selectors';
 
 const CheckList = ({ list }) => list.map(item => (
@@ -274,11 +277,21 @@ class PricingTable extends Component {
 			active: undefined,
 			plans: this.plans,
 			showConfirmBox: false,
+			selectedPlan: null,
 		};
 		// test key
 		// this.stripeKey = 'pk_test_DYtAxDRTg6cENksacX1zhE02';
 		// live key
 		this.stripeKey = 'pk_live_ihb1fzO4h1ykymhpZsA3GaQR';
+	}
+
+	componentDidMount() {
+		const plan = getParam('plan', window.location.search) || null;
+		setTimeout(() => {
+			this.setState({
+				selectedPlan: plan,
+			});
+		}, 500);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -314,19 +327,19 @@ class PricingTable extends Component {
 				this.cancelConfirmBox();
 			}
 		});
-	}
+	};
 
 	showConfirmBox = () => {
 		this.setState({
 			showConfirmBox: true,
 		});
-	}
+	};
 
 	cancelConfirmBox = () => {
 		this.setState({
 			showConfirmBox: false,
 		});
-	}
+	};
 
 	calcPrice(planName) {
 		const { plans } = this.state;
@@ -352,14 +365,11 @@ class PricingTable extends Component {
 			growth,
 			active,
 			showConfirmBox,
-		} = this.state;
+			selectedPlan,
+		} = this.state; // prettier-ignore
 		const {
-			isFreePlan,
-			isBootstrapPlan,
-			isGrowthPlan,
-			isSubmitting,
-			isLoading,
-		} = this.props;
+			isFreePlan, isBootstrapPlan, isGrowthPlan, isSubmitting, isLoading,
+		} = this.props; // prettier-ignore
 		if (isLoading) {
 			return <Loader show message="Updating Plan... Please wait!" />;
 		}
@@ -763,6 +773,7 @@ class PricingTable extends Component {
 									token={token => this.handleToken(token, 'bootstrap-monthly')}
 									stripeKey={this.stripeKey}
 									disabled={isBootstrapPlan}
+									desktopShowModal={selectedPlan === 'bootstrap'}
 								>
 									<AppButton
 										uppercase
@@ -785,6 +796,7 @@ class PricingTable extends Component {
 									amount={this.plans.growth.basePrice * 100}
 									token={token => this.handleToken(token, 'growth-monthly')}
 									stripeKey={this.stripeKey}
+									desktopShowModal={selectedPlan === 'growth'}
 								>
 									<AppButton
 										uppercase
@@ -920,9 +932,7 @@ const mapStateToProps = (state) => {
 		isFreePlan: !get(appPlan, 'isPaid'),
 		isBootstrapPlan: get(appPlan, 'isBootstrap'),
 		isGrowthPlan: get(appPlan, 'isGrowth'),
-		errors: [
-			get(state, '$deleteAppSubscription.error'),
-		],
+		errors: [get(state, '$deleteAppSubscription.error')],
 	};
 };
 
