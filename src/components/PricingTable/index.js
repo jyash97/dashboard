@@ -14,6 +14,7 @@ import PlusMinus from './PlusMinus';
 import NewPricingCard from './NewPricingCard';
 import theme from './theme';
 import { media, hexToRgb } from '../../utils/media';
+import { getParam } from '../../utils';
 import { planBasePrice, displayErrors } from '../../utils/helper';
 import { createAppSubscription, deleteAppSubscription, getAppPlan } from '../../batteries/modules/actions';
 import { getAppPlanByName } from '../../batteries/modules/selectors';
@@ -274,11 +275,21 @@ class PricingTable extends Component {
 			active: undefined,
 			plans: this.plans,
 			showConfirmBox: false,
+			selectedPlan: null,
 		};
 		// test key
 		// this.stripeKey = 'pk_test_DYtAxDRTg6cENksacX1zhE02';
 		// live key
 		this.stripeKey = 'pk_live_ihb1fzO4h1ykymhpZsA3GaQR';
+	}
+
+	componentDidMount() {
+		const plan = getParam('plan', window.location.search) || null;
+		setTimeout(() => {
+			this.setState({
+				selectedPlan: plan,
+			});
+		}, 500);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -352,6 +363,7 @@ class PricingTable extends Component {
 			growth,
 			active,
 			showConfirmBox,
+			selectedPlan,
 		} = this.state;
 		const {
 			isFreePlan,
@@ -763,6 +775,7 @@ class PricingTable extends Component {
 									token={token => this.handleToken(token, 'bootstrap-monthly')}
 									stripeKey={this.stripeKey}
 									disabled={isBootstrapPlan}
+									desktopShowModal={selectedPlan === 'bootstrap'}
 								>
 									<AppButton
 										uppercase
@@ -785,6 +798,7 @@ class PricingTable extends Component {
 									amount={this.plans.growth.basePrice * 100}
 									token={token => this.handleToken(token, 'growth-monthly')}
 									stripeKey={this.stripeKey}
+									desktopShowModal={selectedPlan === 'growth'}
 								>
 									<AppButton
 										uppercase
